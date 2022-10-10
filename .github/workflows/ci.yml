@@ -38,3 +38,17 @@ jobs:
           cache: 'npm'
       - run: npm ci
       - run: npm test
+
+  test-coverage:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      HUSKY: 0
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run test:cov
