@@ -27,3 +27,7 @@ dist-ssr
 # Environment configuration
 .env
 .env.local
+
+# Test Coverage
+coverage
+
