@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+# bin/bootstrap: Resolve all dependencies that the application requires to
+#                run.
+#
+# NOTE: Rarely used directly, but is used by other scripts
+#
+# When to use:
+#   - When changing dependency versions
+
+set -e
+
+cd "$(dirname "$0")/.."
+
+if [ -f ".tool-versions" ] && [ -x "$(command -v asdf)" ]; then
+  asdf install
+else
+  echo "==> Please install asdf version manager"
+fi
+
+if [ -f "package-lock.json" ] && [ -x "$(command -v npm)" ]; then
+  npm install
+fi
