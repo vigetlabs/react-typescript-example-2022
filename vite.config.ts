@@ -11,6 +11,7 @@ export default defineConfig({
     setupFiles: './src/test/setup.ts',
     coverage: {
       all: true,
+      reporter: ['html-spa', 'text', 'clover'],
       include: ['src/**/*.{ts,tsx}'],
       exclude: [
         // ignore type declaration files
