@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+# bin/server: Launch the application and any extra required processes
+#             locally.
+#
+# When to use:
+#   - When you want to start the application locally
+
+set -e
+
+cd "$(dirname "$0")/.."
+
+# ensure everything in the app is up to date.
+bin/update
+
+npm run dev

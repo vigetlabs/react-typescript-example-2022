@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+# bin/update: Update application to run for its current checkout.
+#
+# NOTE: this is run as part of bin/server, so you don't often need to run
+#
+# When to use:
+#           it manually
+#   - After switching branches or pulling down new changes
+
+set -e
+
+cd "$(dirname "$0")/.."
+
+bin/bootstrap
