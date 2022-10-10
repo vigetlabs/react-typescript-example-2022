@@ -2,9 +2,14 @@ name: GitHub CI
 
 on: [push, pull_request]
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ startsWith(github.ref, 'refs/pull/') }}
+
 jobs:
   lint-format:
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     env:
       HUSKY: 0
     steps:
@@ -12,11 +17,13 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
+          cache: 'npm'
       - run: npm ci
       - run: npm run lint
 
   test:
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     env:
       HUSKY: 0
     steps:
@@ -24,5 +31,6 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
+          cache: 'npm'
       - run: npm ci
       - run: npm test
