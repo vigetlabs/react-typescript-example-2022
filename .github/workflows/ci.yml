@@ -25,11 +25,12 @@ jobs:
       - run: npm ci
       - run: npm run lint
 
-  test:
+  build-and-test:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     env:
       HUSKY: 0
+      NODE_ENV: test
     steps:
       - uses: actions/checkout@v3
 
@@ -38,14 +39,14 @@ jobs:
           node-version: 16
           cache: 'npm'
 
-      - run: npm ci
-      - run: npm test
+      - run: bin/ci
 
   test-coverage:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     env:
       HUSKY: 0
+      NODE_ENV: test
     steps:
       - uses: actions/checkout@v3
 
@@ -54,8 +55,7 @@ jobs:
           node-version: 16
           cache: 'npm'
 
-      - run: npm ci
-      - run: npm run test:cov
+      - run: bin/cov
 
       - uses: actions/upload-artifact@v3
         with:
