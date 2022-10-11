@@ -8,7 +8,7 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'jsdom',
-    setupFiles: './src/test/setup.ts',
+    setupFiles: './src/test/setupTests.ts',
     coverage: {
       all: true,
       reporter: ['html-spa', 'text', 'clover'],
