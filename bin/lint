@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+# bin/lint: Run linters on the application.
+#
+# NOTE: you don't often need to run this manually, it should be run as part
+#       of pre-commit hooks and during a CI build
+#
+# When to use:
+#   - When you want to run all linters on the application
+
+set -e
+
+cd "$(dirname "$0")/.."
+
+bin/bootstrap
+
+echo "==> Linting JavaScript…"
+npm run lint
