@@ -20,3 +20,46 @@ $ bin/setup
 ```bash
 $ bin/server
 ```
+
+## Testing
+
+### Running Unit Tests
+
+To run the test suite once, immediately, use:
+
+```bash
+$ bin/test
+```
+
+This also supports optionally passing a test file name that will be fuzzy
+matched against all the specs that `vitest` knows about, e.g.:
+
+```bash
+$ bin/test counter
+```
+
+**Interactively Running Tests (watch mode)**:
+
+To run tests in watch mode:
+
+```bash
+$ npm run test:watch
+```
+
+If you want to open the browser UI:
+
+```bash
+$ npm run test:watch -- --ui
+```
+
+### Running Test Coverage
+
+Test coverage is provided by `vitest` using the `c8` provider. Reporters are
+configured for `html` (handy for local browsing), `text` (cli output), and
+`clover` (XML report for CI).
+
+```bash
+$ bin/cov
+```
+
+Reports are generated in the `coverage` folder.
