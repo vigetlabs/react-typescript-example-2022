@@ -15,7 +15,9 @@ cd "$(dirname "$0")/.."
 if [ -f ".tool-versions" ] && [ -x "$(command -v asdf)" ]; then
   asdf install 1> /dev/null
 else
-  echo "==> Please install asdf version manager"
+  if [ "$CI" != "true" ]; then
+    echo "==> Please install asdf version manager"
+  fi
 fi
 
 if [ -f "package-lock.json" ] && [ -x "$(command -v npm)" ]; then
