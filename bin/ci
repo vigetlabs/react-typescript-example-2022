@@ -10,12 +10,12 @@ set -e
 
 cd "$(dirname "$0")/.."
 
-echo "Running build…"
-date "+%H:%M:%S"
-
-npm run build
-
 echo "Running tests…"
 date "+%H:%M:%S"
 
 bin/test
+
+echo "Running build…"
+date "+%H:%M:%S"
+
+npm run build
