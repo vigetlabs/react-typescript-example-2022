@@ -18,7 +18,7 @@ export default defineConfig({
         'src/**/*.d.ts',
 
         // ignore test files
-        'src/test/setup.ts',
+        'src/test/setupTests.ts',
         'src/**/*.spec.{ts,tsx}',
 
         // ignore specific source files (workaround)
