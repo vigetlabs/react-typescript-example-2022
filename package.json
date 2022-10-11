@@ -10,7 +10,7 @@
     "format": "prettier . --write",
     "preview": "vite preview",
     "test": "vitest run",
-    "test:watch": "vitest",
+    "test:watch": "vitest watch",
     "test:cov": "vitest run --coverage",
     "prepare": "husky install"
   },
@@ -27,6 +27,7 @@
     "@typescript-eslint/eslint-plugin": "^5.36.2",
     "@vitejs/plugin-react": "^2.1.0",
     "@vitest/coverage-c8": "^0.24.1",
+    "@vitest/ui": "^0.24.1",
     "eslint": "^8.23.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-import-resolver-typescript": "^3.5.1",
