@@ -5,33 +5,34 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig({
   plugins: [
+    tsconfigPaths(),
     react({
       jsxImportSource: '@emotion/react',
       babel: {
         plugins: ['@emotion/babel-plugin'],
       },
     }),
-    tsconfigPaths(),
   ],
   test: {
     globals: true,
     environment: 'jsdom',
     setupFiles: './src/test/setupTests.ts',
+    clearMocks: true,
+    reporters: ['dot'],
     coverage: {
-      all: true,
+      provider: 'istanbul',
       reporter: ['html-spa', 'text', 'clover'],
       include: ['src/**/*.{ts,tsx}'],
       exclude: [
         // ignore type declaration files
         'src/**/*.d.ts',
-
+        // ignore styled component files, erroneous branch coverage reporting
+        'src/**/styled.{ts,tsx}',
         // ignore test files
-        'src/test/setupTests.ts',
+        'src/test/*',
         'src/**/*.spec.{ts,tsx}',
-
-        // ignore specific source files (workaround)
-        // Note: c8 currently doesn't support `all: true` AND coverage ignore
-        //       comments (https://github.com/bcoe/c8/issues/318)
+        // ignore specific source files (workaround due to issues with
+        // magic comments used to skip coverage of certain lines)
         'src/main.tsx',
       ],
       statements: 100,
