@@ -21,6 +21,33 @@ $ bin/setup
 $ bin/server
 ```
 
+## Styling
+
+This app uses `emotion` with the `styled` variation. This variation is preferred
+(over the `css` prop) because it allows for highly expressive and tidy jsx
+(using appropriately named styled components with descriptive names that
+indicate their intended purpose).
+
+Within the `styled` API, this app uses the CSS object notation which looks like:
+
+```js
+const Button = styled('button')(({ theme }) => ({
+  background: theme.colors.background,
+}))
+```
+
+This approach has several benefits:
+- better support for intellisense over css string template literals
+- more concise when referencing props such as the theme
+
+**Note(10/12/2022)**: For some unknown reason  using the latest versions of
+`@emotion/react` and `@emotion/styled` (`11.10.4`) breaks the tests in some
+strange and undebuggable way. The `ThemeProvider` does not seem to properly
+provide the theme to `styled` components.
+
+For this reason, we explicitly depend on `11.9.3` as a workaround until the
+issue is resolved.
+
 ## Testing
 
 ### Running Unit Tests
@@ -54,9 +81,9 @@ $ npm run test:watch -- --ui
 
 ### Running Test Coverage
 
-Test coverage is provided by `vitest` using the `c8` provider. Reporters are
-configured for `html` (handy for local browsing), `text` (cli output), and
-`clover` (XML report for CI).
+Test coverage is provided by `vitest` using the `istanbul` provider. Reporters
+are configured for `html-spa` (handy for local browsing), `text` (cli output),
+and `clover` (XML report used in CI).
 
 ```bash
 $ bin/cov
