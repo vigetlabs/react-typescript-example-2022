@@ -1,12 +1,15 @@
+import config from 'config';
 import { createTrackedSelector } from 'react-tracked';
 import create from 'zustand';
-import { combine, persist, devtools } from 'zustand/middleware';
+import { combine, devtools, persist } from 'zustand/middleware';
 import { immer } from 'zustand/middleware/immer';
 
 export type ThemeMode = 'light' | 'dark';
 
-const colorSchemeQuery = window.matchMedia('(prefers-color-scheme: dark)');
-const preferredMode: ThemeMode = colorSchemeQuery.matches ? 'dark' : 'light';
+function getInitialMode(): ThemeMode {
+  const colorSchemeQuery = window.matchMedia('(prefers-color-scheme: dark)');
+  return colorSchemeQuery.matches ? 'dark' : 'light';
+}
 
 // @TODO(shawk): is it worth building an abstraction around this?
 // https://github.com/colorfy-software/zfy has a decent API for this.
@@ -16,12 +19,7 @@ export const useThemeStoreImpl = create(
   persist(
     immer(
       devtools(
-        combine({ mode: preferredMode }, (set) => ({
-          setMode: (mode: ThemeMode) => {
-            set((state) => {
-              state.mode = mode;
-            });
-          },
+        combine({ mode: getInitialMode() }, (set) => ({
           toggleMode: () => {
             set((state) => {
               state.mode = state.mode === 'light' ? 'dark' : 'light';
@@ -29,7 +27,7 @@ export const useThemeStoreImpl = create(
           },
         })),
         {
-          enabled: import.meta.env.DEV,
+          enabled: config.enableDevtools,
         },
       ),
     ),
@@ -38,6 +36,10 @@ export const useThemeStoreImpl = create(
     },
   ),
 );
+
+export function reinitialize() {
+  useThemeStoreImpl.setState({ mode: getInitialMode() });
+}
 
 export const useThemeStore = createTrackedSelector(useThemeStoreImpl);
 export type State = ReturnType<typeof useThemeStore>;
