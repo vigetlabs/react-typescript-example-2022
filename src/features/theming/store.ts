@@ -6,7 +6,7 @@ import { immer } from 'zustand/middleware/immer';
 
 export type ThemeMode = 'light' | 'dark';
 
-function getInitialMode(): ThemeMode {
+export function getInitialMode(): ThemeMode {
   const colorSchemeQuery = window.matchMedia('(prefers-color-scheme: dark)');
   return colorSchemeQuery.matches ? 'dark' : 'light';
 }
@@ -20,6 +20,11 @@ export const useThemeStoreImpl = create(
     immer(
       devtools(
         combine({ mode: getInitialMode() }, (set) => ({
+          setMode: (mode: ThemeMode) => {
+            set((state) => {
+              state.mode = mode;
+            });
+          },
           toggleMode: () => {
             set((state) => {
               state.mode = state.mode === 'light' ? 'dark' : 'light';
@@ -36,10 +41,6 @@ export const useThemeStoreImpl = create(
     },
   ),
 );
-
-export function reinitialize() {
-  useThemeStoreImpl.setState({ mode: getInitialMode() });
-}
 
 export const useThemeStore = createTrackedSelector(useThemeStoreImpl);
 export type State = ReturnType<typeof useThemeStore>;
