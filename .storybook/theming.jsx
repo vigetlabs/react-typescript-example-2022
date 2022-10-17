@@ -1,7 +1,6 @@
 import {
   darkTheme,
   lightTheme,
-  functions,
   useThemeStore,
   useThemeStoreImpl,
 } from '../src/features/theming';
@@ -9,7 +8,7 @@ import { GlobalStyles } from '../src/global-styles';
 import { ThemeProvider } from '@emotion/react';
 import { addons } from '@storybook/addons';
 import { UPDATE_GLOBALS } from '@storybook/core-events';
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 const getTheme = (themeName) => {
   switch (themeName) {
@@ -32,12 +31,14 @@ export const withThemeProvider = (Story, context) => {
    */
   useEffect(() => {
     const unsubscribe = useThemeStoreImpl.subscribe((theme) => {
+      // set the theme in storybook (if it changed in the store)
       // ref: https://github.com/storybookjs/storybook/issues/12982#issuecomment-865304427
       channel.emit(UPDATE_GLOBALS, {
         globals: { theme: theme.mode },
       });
     });
 
+    // set the theme in the store (if it changed via the storybook global UI)
     themeStore.setMode(context.globals.theme);
 
     return () => {
@@ -49,7 +50,7 @@ export const withThemeProvider = (Story, context) => {
     <>
       <GlobalStyles />
 
-      <ThemeProvider theme={{ ...theme, ...functions }}>
+      <ThemeProvider theme={theme}>
         <Story {...context} />
       </ThemeProvider>
     </>
