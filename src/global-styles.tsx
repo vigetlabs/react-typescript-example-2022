@@ -105,8 +105,7 @@ const reset = css`
   /**
    * 9. Create a root stacking context
    */
-  #root,
-  #__next {
+  #root {
     isolation: isolate;
   }
 `;
