@@ -1,7 +1,6 @@
 import { Counter } from 'components/counter';
 import { ThemeToggleButton } from 'components/theme-toggle-button';
-import { useThemeStore } from 'features/theming/store';
-import { ConnectedThemeProvider } from 'features/theming/theme-provider';
+import { useThemeStore, ConnectedThemeProvider } from 'features/theming';
 import { Card, Heading, Paragraph, Wrapper } from 'styled';
 
 // @TODO(shawk): move this and actually do some routing
