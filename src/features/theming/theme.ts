@@ -11,7 +11,14 @@ type ColorScale = {
   900: string;
 };
 
+const UNIT = 4;
+
+export const functions = {
+  spacing: (n: number) => `${UNIT * n}px`,
+};
+
 export type AppTheme = {
+  name: string;
   colors: {
     primary: string;
     secondary: string;
@@ -48,8 +55,7 @@ export type AppTheme = {
 };
 
 const baseTheme = {
-  unit: 4,
-  spacing: (n: number) => `${baseTheme.unit * n}px`,
+  unit: UNIT,
   colors: {
     palette: {
       slate: {
@@ -321,7 +327,9 @@ const baseTheme = {
 };
 
 export const lightTheme: AppTheme = {
+  name: 'light',
   ...baseTheme,
+  ...functions,
   colors: {
     primary: '#0ea5e9',
     secondary: '#7c3aed',
@@ -333,7 +341,9 @@ export const lightTheme: AppTheme = {
 } as const;
 
 export const darkTheme: AppTheme = {
+  name: 'dark',
   ...baseTheme,
+  ...functions,
   colors: {
     primary: '#22c55e',
     secondary: '#eab308',
