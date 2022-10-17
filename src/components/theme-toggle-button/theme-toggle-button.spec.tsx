@@ -1,6 +1,5 @@
 import { ThemeToggleButton } from '.';
-import { useThemeStoreImpl } from 'features/theming/store';
-import { ConnectedThemeProvider } from 'features/theming/theme-provider';
+import { useThemeStoreImpl, ConnectedThemeProvider } from 'features/theming';
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
