@@ -5,8 +5,17 @@ module.exports = {
     es2021: true,
     node: true,
   },
-  parser: '@typescript-eslint/parser',
-  extends: ['plugin:import/recommended', 'plugin:prettier/recommended'],
+  parserOptions: {
+    ecmaFeatures: {
+      jsx: true,
+    },
+  },
+  extends: [
+    'plugin:import/recommended',
+    'plugin:import/typescript',
+    'plugin:storybook/recommended',
+    'plugin:prettier/recommended',
+  ],
   rules: {
     'import/order': [
       'error',
@@ -34,8 +43,8 @@ module.exports = {
   overrides: [
     {
       files: ['*.ts', '*.tsx'],
+      parser: '@typescript-eslint/parser',
       extends: [
-        'plugin:import/typescript',
         'plugin:@typescript-eslint/eslint-recommended',
         'plugin:@typescript-eslint/recommended',
       ],
