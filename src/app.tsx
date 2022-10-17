@@ -1,6 +1,7 @@
 import { Counter } from 'components/counter';
 import { ThemeToggleButton } from 'components/theme-toggle-button';
 import { useThemeStore, ConnectedThemeProvider } from 'features/theming';
+import { GlobalStyles } from 'global-styles';
 import { Card, Heading, Paragraph, Wrapper } from 'styled';
 
 // @TODO(shawk): move this and actually do some routing
@@ -26,9 +27,12 @@ function Router() {
 
 function App() {
   return (
-    <ConnectedThemeProvider>
-      <Router />
-    </ConnectedThemeProvider>
+    <>
+      <GlobalStyles />
+      <ConnectedThemeProvider>
+        <Router />
+      </ConnectedThemeProvider>
+    </>
   );
 }
 

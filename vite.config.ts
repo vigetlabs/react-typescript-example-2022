@@ -34,6 +34,7 @@ export default defineConfig({
         // ignore specific source files (workaround due to issues with
         // magic comments used to skip coverage of certain lines)
         'src/main.tsx',
+        'src/global-styles.tsx',
       ],
       statements: 100,
       branches: 100,
