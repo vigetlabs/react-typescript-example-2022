@@ -9,6 +9,7 @@
     "strict": true,
     "noImplicitReturns": true,
     "noUnusedLocals": true,
+    "useUnknownInCatchVariables": true,
     "forceConsistentCasingInFileNames": true,
     "allowSyntheticDefaultImports": true,
     "module": "ESNext",
