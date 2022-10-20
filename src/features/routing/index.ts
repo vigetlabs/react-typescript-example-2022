@@ -1,2 +1,2 @@
 export * from './router';
-export { urls } from './routes';
+export * from './urls';
