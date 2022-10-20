@@ -1,5 +1,5 @@
-import { Button } from './styled';
 import { useThemeStore } from 'features/theming';
+import { Button } from 'features/ui';
 import React from 'react';
 
 export const ThemeToggleButton = ({
