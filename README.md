@@ -90,3 +90,13 @@ $ bin/cov
 ```
 
 Reports are generated in the `coverage` folder.
+
+**Ignoring lines for coverage**
+
+Istanbul supports [special comments](https://github.com/gotwarlost/istanbul/blob/master/ignoring-code-for-coverage.md)
+for ignoring certain lines for the purposes of calculating test coverage. But
+because of [this issue](https://github.com/vitest-dev/vitest/issues/2021) the
+comments you add may not have any effect on the coverage due to `esbuild`
+removing the comments during compilation. There is a [PR](https://github.com/istanbuljs/istanbuljs/pull/693)
+to Istanbul to allow for "legal comments" (`/*! istanbul ignore next */`) which
+shouldn't get stripped but for the time being we use `/* istanbul ignore next -- @preserve */`.
