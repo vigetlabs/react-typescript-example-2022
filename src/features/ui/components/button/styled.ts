@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-export const Button = styled('button')(({ theme }) => ({
+export const Wrapper = styled('button')(({ theme }) => ({
   background: theme.colors.primary,
   color: theme.colors.text,
   border: '1px solid transparent',
@@ -10,5 +10,9 @@ export const Button = styled('button')(({ theme }) => ({
 
   '&:hover, &:focus': {
     border: `1px solid ${theme.colors.secondary}`,
+  },
+
+  '&:disabled': {
+    background: theme.colors.surface,
   },
 }));

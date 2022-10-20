@@ -35,7 +35,7 @@ describe('features/theming/store', () => {
   });
 
   describe('with `prefers-color-scheme: dark`', () => {
-    beforeEach(async () => {
+    beforeEach(() => {
       vi.mocked(window.matchMedia, { partial: true }).mockReturnValue({
         matches: true,
       });
@@ -47,7 +47,7 @@ describe('features/theming/store', () => {
   });
 
   describe('without `prefers-color-scheme: dark`', () => {
-    beforeEach(async () => {
+    beforeEach(() => {
       vi.mocked(window.matchMedia, { partial: true }).mockReturnValue({
         matches: false,
       });
