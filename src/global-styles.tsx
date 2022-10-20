@@ -108,6 +108,14 @@ const reset = css`
   #root {
     isolation: isolate;
   }
+
+  /**
+   * 10. Remove list styling
+   */
+  ul {
+    padding: 0;
+    list-style: none;
+  }
 `;
 
 export function GlobalStyles() {
