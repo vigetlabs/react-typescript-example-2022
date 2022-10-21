@@ -12,7 +12,8 @@ export async function action({ request }: ActionFunctionArgs) {
     });
 
     getAuthState().signIn(user);
-    return redirect(formData.get('redirect') as string);
+
+    return redirect(formData.get('redirect') as string, 302);
   } catch (error) {
     return handleUnauthorizedError(error);
   }

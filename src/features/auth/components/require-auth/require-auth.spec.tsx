@@ -1,5 +1,6 @@
 import { RequireAuth } from '.';
 import { getAuthState } from 'features/auth/store';
+import { barry } from 'test/fixtures/user/default';
 import { act, render, waitFor } from '@testing-library/react';
 import { createMemoryRouter, RouterProvider, To } from 'react-router-dom';
 
@@ -44,12 +45,12 @@ function setup() {
   );
 
   return {
+    ...render(<RouterProvider router={router} />),
     navigate: async (to: To, opts?: { state?: unknown }) => {
       await act(() => {
         router.navigate(to, opts);
       });
     },
-    ...render(<RouterProvider router={router} />),
   };
 }
 
@@ -68,12 +69,7 @@ describe('<RequireAuth />', () => {
 
   describe('with an authenticated user', () => {
     beforeEach(() => {
-      getAuthState().signIn({
-        id: '1',
-        email: 'bb@taz.com',
-        firstName: 'Barry',
-        lastName: 'Bluejeans',
-      });
+      getAuthState().signIn(barry);
     });
 
     describe('with children', () => {

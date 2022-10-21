@@ -1,7 +1,7 @@
 import { ApiError, NetworkError } from './api-error';
 import { http } from './client';
 import { server } from 'test/mocks/server';
-import axios, { AxiosResponse } from 'axios';
+import { AxiosResponse } from 'axios';
 import { rest } from 'msw';
 
 describe('features/http/client', () => {
@@ -49,7 +49,7 @@ describe('features/http/client', () => {
     it('returns the response data', async () => {
       const response: AxiosResponse = await http.get('/success');
 
-      expect(response.status).toEqual(200);
+      expect(response.status).toBe(200);
     });
   });
 

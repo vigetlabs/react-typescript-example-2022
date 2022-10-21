@@ -1,5 +1,5 @@
 import { App } from './app';
-import config from 'config';
+import { config } from 'config';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 

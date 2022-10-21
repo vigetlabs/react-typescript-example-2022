@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom/extend-expect';
 import 'test/mocks/matchMedia';
 import 'test/mocks/zustand';
-import 'test/mocks/client';
+import 'test/mocks/config';
 
 import { server } from './mocks/server';
 
@@ -13,6 +13,6 @@ afterEach(() => {
   server.resetHandlers();
 });
 
-afterAll(() => {
+afterAll(async () => {
   server.close();
 });

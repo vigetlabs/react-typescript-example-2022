@@ -1,4 +1,4 @@
-import config from 'config';
+import { config } from 'config';
 import { createTrackedSelector } from 'react-tracked';
 import create from 'zustand';
 import { combine, devtools } from 'zustand/middleware';
