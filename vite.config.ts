@@ -23,6 +23,7 @@ export default defineConfig({
     setupFiles: './src/test/setupTests.ts',
     clearMocks: true,
     restoreMocks: true,
+    include: ['./src/**/*.{spec,test}.{ts,tsx}'],
     reporters: process.env.GITHUB_ACTIONS
       ? ['default', new GithubActionsReporter()]
       : 'dot',

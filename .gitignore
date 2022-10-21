@@ -30,6 +30,6 @@ dist-ssr
 
 # Test Coverage
 coverage
-/test-results/
-/e2e/report/
+e2e/reports/
+e2e-dist/
 /playwright/.cache/
