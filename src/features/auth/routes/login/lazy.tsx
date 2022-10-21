@@ -8,6 +8,7 @@ let Component:
   () => import('./index'),
 );
 
+// @TODO(shawk): add a full-screen loader component
 function Fallback() {
   return <>...</>;
 }
@@ -26,11 +27,6 @@ export async function loadLoginPage() {
   return import('./index').then(
     (componentModule) => {
       if (!controller.signal.aborted) {
-        // We loaded the component _before_ our loader finished, so we can
-        // blow away React.lazy and just use the component directly.  This
-        // avoids the flicker we'd otherwise get since React.lazy would need
-        // to throw the already-resolved promise up to the Suspense boundary
-        // one time to get the resolved value
         Component = componentModule.default;
       }
     },
