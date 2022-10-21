@@ -14,6 +14,9 @@ export default defineConfig({
       },
     }),
   ],
+  server: {
+    port: process.env.PORT ? Number(process.env.PORT) : 3000,
+  },
   test: {
     globals: true,
     environment: 'jsdom',
@@ -25,7 +28,11 @@ export default defineConfig({
       : 'dot',
     coverage: {
       provider: 'istanbul',
-      reporter: ['html-spa', 'text', 'clover'],
+      reporter: ['html-spa', 'json', 'text', 'clover'],
+      statements: 100,
+      branches: 100,
+      functions: 100,
+      lines: 100,
       include: ['src/**/*.{ts,tsx}'],
       exclude: [
         // ignore type declaration files
@@ -47,10 +54,6 @@ export default defineConfig({
         'src/main.tsx',
         'src/global-styles.tsx',
       ],
-      statements: 100,
-      branches: 100,
-      functions: 100,
-      lines: 100,
     },
   },
 });

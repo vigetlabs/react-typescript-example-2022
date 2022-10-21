@@ -1,4 +1,5 @@
 import { useAuthStore } from '../../store';
+import { config } from 'config';
 import { urls } from 'features/routing/urls';
 import {
   Box,
@@ -71,7 +72,7 @@ export default function LoginPage() {
             id="email"
             type="email"
             name="email"
-            defaultValue="bb@taz.com"
+            defaultValue={config.defaultUserEmail}
             disabled={isSubmitting}
           />
 
@@ -83,7 +84,7 @@ export default function LoginPage() {
             id="password"
             type="password"
             name="password"
-            defaultValue="abc"
+            defaultValue={config.defaultUserPassword}
             disabled={isSubmitting}
           />
         </Grid>
