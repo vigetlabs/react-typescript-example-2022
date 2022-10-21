@@ -2,6 +2,7 @@
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 import tsconfigPaths from 'vite-tsconfig-paths';
+import GithubActionsReporter from 'vitest-github-actions-reporter';
 
 export default defineConfig({
   plugins: [
@@ -19,7 +20,9 @@ export default defineConfig({
     setupFiles: './src/test/setupTests.ts',
     clearMocks: true,
     restoreMocks: true,
-    reporters: ['dot'],
+    reporters: process.env.GITHUB_ACTIONS
+      ? ['default', new GithubActionsReporter()]
+      : 'dot',
     coverage: {
       provider: 'istanbul',
       reporter: ['html-spa', 'text', 'clover'],
