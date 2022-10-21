@@ -27,11 +27,18 @@ export default defineConfig({
       exclude: [
         // ignore type declaration files
         'src/**/*.d.ts',
+
         // ignore styled component files, erroneous branch coverage reporting
         'src/**/styled.{ts,tsx}',
+
         // ignore test files
         'src/test/*',
         'src/**/*.spec.{ts,tsx}',
+
+        // ignore lazy loading files, they don't contain any logic that's
+        // worth testing
+        'src/**/lazy.tsx',
+
         // ignore specific source files (workaround due to issues with
         // magic comments used to skip coverage of certain lines)
         'src/main.tsx',

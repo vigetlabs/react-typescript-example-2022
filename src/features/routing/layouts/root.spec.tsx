@@ -1,9 +1,8 @@
 import { RootLayout } from './root';
 import { getAuthState } from 'features/auth';
 import { ConnectedThemeProvider } from 'features/theming';
-import { render } from '@testing-library/react';
+import { render, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { act } from 'react-dom/test-utils';
 import { createMemoryRouter, RouterProvider } from 'react-router-dom';
 
 const router = createMemoryRouter(
@@ -88,9 +87,11 @@ describe('<RootLayout />', () => {
       const { user, findByText, findByRole } = setup();
       const btn = await findByRole('button', { name: /sign out/i });
 
-      await act(() => user.click(btn));
+      await user.click(btn);
 
-      expect(getAuthState().isAuthenticated).toBe(false);
+      await waitFor(() => {
+        expect(getAuthState().isAuthenticated).toBe(false);
+      });
 
       expect(await findByText('login')).toBeInTheDocument();
     });

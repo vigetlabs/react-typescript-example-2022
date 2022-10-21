@@ -1,5 +1,5 @@
 import { ApiError } from './api-error';
-import config from 'config';
+import { config } from 'config';
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 export const http = createClient(config.apiBaseUrl, config.apiRequestTimeout);

@@ -42,7 +42,7 @@ describe('features/theming/store', () => {
     });
 
     it('`getInitialMode` returns `dark` mode', async () => {
-      expect(getInitialMode()).toEqual('dark');
+      expect(getInitialMode()).toBe('dark');
     });
   });
 
@@ -54,7 +54,7 @@ describe('features/theming/store', () => {
     });
 
     it('`getInitialMode` returns `light` mode', async () => {
-      expect(getInitialMode()).toEqual('light');
+      expect(getInitialMode()).toBe('light');
     });
   });
 });

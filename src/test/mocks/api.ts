@@ -1,15 +1,14 @@
 import { LoginParams, LoginResponse } from 'features/auth/service';
 import { wait } from 'helpers/async';
 import { ApiResponse } from 'helpers/types';
+import { barry } from 'test/fixtures/user/default';
 import { rest } from 'msw';
 
-type AuthLoginBody = { email: string };
-
 export const handlers = [
-  rest.post<AuthLoginBody, LoginParams, ApiResponse<LoginResponse>>(
+  rest.post<LoginParams, Record<string, never>, ApiResponse<LoginResponse>>(
     '/auth/login',
     async (req, res, ctx) => {
-      const { email } = await req.json();
+      const { email } = await req.json<LoginParams>();
 
       await wait(500);
 
@@ -39,12 +38,7 @@ export const handlers = [
         ctx.status(200),
         ctx.json({
           success: true,
-          data: {
-            id: 'f79e82e8-c34a-4dc7-a49e-9fadc0979fda',
-            email,
-            firstName: 'Barry',
-            lastName: 'Bluejeans',
-          },
+          data: barry,
         }),
       );
     },
