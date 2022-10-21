@@ -1,14 +1,13 @@
-import React from 'react';
-
-const HomePage = React.lazy(() => import('./routes/home'));
+import { HomePage, loadHomePage } from './routes/home/lazy';
 
 export const urls = {
   home: '/',
-};
+} as const;
 
 export const routes = [
   {
     path: urls.home,
     element: <HomePage />,
+    loader: loadHomePage,
   },
 ];

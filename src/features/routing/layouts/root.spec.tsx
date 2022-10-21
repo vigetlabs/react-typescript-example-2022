@@ -1,7 +1,9 @@
 import { RootLayout } from './root';
+import { getAuthState } from 'features/auth';
 import { ConnectedThemeProvider } from 'features/theming';
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { act } from 'react-dom/test-utils';
 import { createMemoryRouter, RouterProvider } from 'react-router-dom';
 
 const router = createMemoryRouter(
@@ -9,6 +11,10 @@ const router = createMemoryRouter(
     {
       path: '/',
       element: <RootLayout />,
+    },
+    {
+      path: '/login',
+      element: <div>login</div>,
     },
   ],
   {
@@ -38,5 +44,55 @@ describe('<RootLayout />', () => {
     await user.click(btn);
 
     expect(btn).toHaveTextContent('🌞');
+  });
+
+  describe('with an unauthenticated user', () => {
+    it('renders link to the login page', async () => {
+      const { findByRole } = setup();
+
+      expect(await findByRole('link', { name: /log in/i })).toBeInTheDocument();
+    });
+
+    it('renders a "not logged in" notice', async () => {
+      const { findByText } = setup();
+
+      expect(await findByText('You are not logged in.')).toBeInTheDocument();
+    });
+  });
+
+  describe('with an authenticated user', () => {
+    beforeEach(() => {
+      getAuthState().signIn({
+        id: '1',
+        email: 'bb@taz.com',
+        firstName: 'Barry',
+        lastName: 'Bluejeans',
+      });
+    });
+
+    it('does not render a link to the login page', async () => {
+      const { queryByRole } = setup();
+
+      expect(
+        await queryByRole('link', { name: /log in/i }),
+      ).not.toBeInTheDocument();
+    });
+
+    it('renders a greeting to the logged-in user', async () => {
+      const { findByText } = setup();
+
+      expect(await findByText('Welcome Barry Bluejeans!')).toBeInTheDocument();
+    });
+
+    it('clicking "Sign Out" logs the user out and redirects to /login', async () => {
+      const { user, findByText, findByRole } = setup();
+      const btn = await findByRole('button', { name: /sign out/i });
+
+      await act(() => user.click(btn));
+
+      expect(getAuthState().isAuthenticated).toBe(false);
+
+      expect(await findByText('login')).toBeInTheDocument();
+    });
   });
 });

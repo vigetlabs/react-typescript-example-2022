@@ -22,3 +22,17 @@ export type PolyComponent<C extends React.ElementType, P = unknown> = <
 >(
   props: PolyProps<E, P>,
 ) => JSX.Element | null;
+
+export type ApiSuccess<T> = { success: true; data: T };
+
+export type ApiFailure = {
+  success: false;
+  errors: {
+    status: number;
+    code: string;
+    title: string;
+    detail?: string;
+  }[];
+};
+
+export type ApiResponse<T> = ApiSuccess<T> | ApiFailure;

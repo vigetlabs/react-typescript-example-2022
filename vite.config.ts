@@ -18,6 +18,7 @@ export default defineConfig({
     environment: 'jsdom',
     setupFiles: './src/test/setupTests.ts',
     clearMocks: true,
+    restoreMocks: true,
     reporters: ['dot'],
     coverage: {
       provider: 'istanbul',
