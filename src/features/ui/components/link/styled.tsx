@@ -1,10 +1,20 @@
+import { keyframes } from '@emotion/react';
 import styled from '@emotion/styled';
-import { forwardRef } from 'react';
-import { LinkProps, Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 
-type Props = LinkProps & React.ComponentPropsWithoutRef<'a'>;
+const fadeIn = keyframes({
+  to: {
+    opacity: 1,
+  },
+});
 
-const Anchor = styled(RouterLink)(({ theme }) => ({
+const fadeOut = keyframes({
+  to: {
+    opacity: 0,
+  },
+});
+
+export const Anchor = styled(RouterLink)(({ theme }) => ({
   color: theme.colors.text,
   fontWeight: 'bold',
   textDecoration: 'none',
@@ -13,13 +23,16 @@ const Anchor = styled(RouterLink)(({ theme }) => ({
   },
 }));
 
-export const Link = forwardRef<HTMLAnchorElement, Props>(function (
-  { children, ...props },
-  ref,
-) {
-  return (
-    <Anchor ref={ref} {...props}>
-      {children}
-    </Anchor>
-  );
-});
+export const LoadingIndicator = styled('span')<{ isActive: boolean }>(
+  ({ isActive }) => ({
+    opacity: 0,
+    animation: isActive ? fadeIn : fadeOut,
+    animationDuration: isActive ? '0.3s' : '0.1s',
+    animationDelay: isActive ? '0.3s' : '0s',
+    animationFillMode: 'both',
+    animationTimingFunction: 'ease-in-out',
+    '&::before': {
+      content: '"⏳"',
+    },
+  }),
+);

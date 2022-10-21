@@ -2,7 +2,7 @@ import { Router } from 'features/routing';
 import { ConnectedThemeProvider } from 'features/theming';
 import { GlobalStyles } from 'global-styles';
 
-function App() {
+export function App() {
   return (
     <>
       <GlobalStyles />
@@ -13,5 +13,3 @@ function App() {
     </>
   );
 }
-
-export default App;
