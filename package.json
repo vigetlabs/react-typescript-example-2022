@@ -50,7 +50,6 @@
     "@vitejs/plugin-react": "^2.1.0",
     "@vitest/coverage-istanbul": "^0.24.1",
     "@vitest/ui": "^0.24.1",
-    "axios-mock-adapter": "^1.21.2",
     "babel-loader": "^8.2.5",
     "eslint": "^8.23.0",
     "eslint-config-prettier": "^8.5.0",
