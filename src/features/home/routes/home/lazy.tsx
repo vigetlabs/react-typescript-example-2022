@@ -8,6 +8,7 @@ let Component:
   () => import('./index'),
 );
 
+// @TODO(shawk): add a full-screen loader component
 function Fallback() {
   return <>...</>;
 }
