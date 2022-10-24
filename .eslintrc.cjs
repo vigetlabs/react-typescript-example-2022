@@ -10,13 +10,19 @@ module.exports = {
       jsx: true,
     },
   },
+  plugins: ['@emotion'],
   extends: [
+    'eslint:recommended',
     'plugin:import/recommended',
     'plugin:import/typescript',
+    'plugin:react/recommended',
+    'plugin:react-hooks/recommended',
     'plugin:storybook/recommended',
     'plugin:prettier/recommended',
   ],
   rules: {
+    'react/react-in-jsx-scope': 'off',
+    'react/no-unknown-property': ['error', { ignore: ['css'] }],
     'import/order': [
       'error',
       {
@@ -39,6 +45,9 @@ module.exports = {
   },
   settings: {
     'import/ignore': ['react'],
+    react: {
+      version: 'detect',
+    },
   },
   overrides: [
     {

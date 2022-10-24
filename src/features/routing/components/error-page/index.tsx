@@ -1,9 +1,13 @@
-import { RootLayout } from '../../layouts/root';
 import { ForbiddenError, UnauthorizedError } from 'features/http';
 import { Box, Heading, Paragraph } from 'features/ui';
+import React from 'react';
 import { useRouteError } from 'react-router-dom';
 
-export function ErrorPage() {
+export function ErrorPage({
+  layout: Layout,
+}: {
+  layout: React.ComponentType<{ children?: React.ReactNode }>;
+}) {
   const error = useRouteError();
 
   let content = <UnexpectedErrorPage />;
@@ -14,7 +18,7 @@ export function ErrorPage() {
     content = <ForbiddenErrorPage />;
   }
 
-  return <RootLayout>{content}</RootLayout>;
+  return <Layout>{content}</Layout>;
 }
 
 function UnauthorizedErrorPage() {

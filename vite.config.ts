@@ -1,10 +1,15 @@
 /// <reference types="vitest" />
+import 'dotenv/config';
+
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import GithubActionsReporter from 'vitest-github-actions-reporter';
 
 export default defineConfig({
+  server: {
+    port: Number(process.env.PORT),
+  },
   plugins: [
     tsconfigPaths(),
     react({
@@ -14,9 +19,6 @@ export default defineConfig({
       },
     }),
   ],
-  server: {
-    port: process.env.PORT ? Number(process.env.PORT) : 3000,
-  },
   test: {
     globals: true,
     environment: 'jsdom',
