@@ -5,7 +5,7 @@ import { LinkProps, useNavigation } from 'react-router-dom';
 
 type Props = LinkProps & React.ComponentPropsWithoutRef<'a'>;
 
-export const Link = forwardRef<HTMLAnchorElement, Props>(function (
+export const Link = forwardRef<HTMLAnchorElement, Props>(function LinkImpl(
   { children, to, ...props },
   ref,
 ) {
