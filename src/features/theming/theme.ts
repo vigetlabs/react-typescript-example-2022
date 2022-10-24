@@ -4,7 +4,13 @@ export type AppTheme = {
   name: string;
   unit: number;
   spacing: (n: number) => string;
+  remPx: (n: number) => string;
+  mqMin: (bp: BreakPoint) => string;
+  mqMax: (bp: BreakPoint) => string;
   colors: {
+    white: string;
+    shadow: string;
+    black: string;
     primary: string;
     secondary: string;
     background: string;
@@ -22,15 +28,41 @@ export type AppTheme = {
     };
     palette: typeof palette;
   };
+  easings: {
+    easeInBounce: string;
+    easeInQuart: string;
+    easeOutQuart: string;
+  };
 };
+
+const breakPoints = {
+  sm: 640,
+  md: 768,
+  lg: 1024,
+  xl: 1280,
+  '2xl': 1536,
+};
+
+type BreakPoint = keyof typeof breakPoints;
 
 const baseTheme = {
   unit: 4,
   spacing: (n: number) => `${baseTheme.unit * n}px`,
+  remPx: (pixels: number) => `${pixels / 16}rem`,
+  mqMin: (bp: BreakPoint) => `@media (min-width: ${breakPoints[bp] / 16}rem)`,
+  mqMax: (bp: BreakPoint) => `@media (max-width: ${breakPoints[bp] / 16}rem)`,
   colors: {
+    white: '#fff',
+    shadow: '#18181b',
+    black: '#000',
     palette,
   },
-};
+  easings: {
+    easeInBounce: 'cubic-bezier(0.215, 0.61, 0.355, 1)',
+    easeInQuart: 'cubic-bezier(0.895, 0.03, 0.685, 0.22)',
+    easeOutQuart: 'cubic-bezier(0.165, 0.84, 0.44, 1)',
+  },
+} as const;
 
 export const lightTheme: AppTheme = {
   name: 'light',

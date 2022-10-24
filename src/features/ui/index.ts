@@ -1,9 +1,13 @@
-export * from './components/box';
+export { Box } from './components/box';
 export * from './components/button';
 export * from './components/counter';
 export * from './components/grid';
 export * from './components/heading';
 export * from './components/error-messages';
-export * from './components/link';
+export { Anchor, Link } from './components/link';
+export * from './components/movie-link';
+export * from './components/movie-poster';
+export * from './components/movie-rating';
+export * from './components/movies-grid';
 export * from './components/paragraph';
 export * from './components/screen-reader-text';

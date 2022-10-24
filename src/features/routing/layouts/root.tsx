@@ -4,6 +4,7 @@ import { useAuthStore } from 'features/auth';
 import { ThemeToggleButton, useThemeStore } from 'features/theming';
 import { Box, Button, Link, Paragraph } from 'features/ui';
 import { WithChildren } from 'helpers/types';
+import { reverse } from 'named-urls';
 import { Outlet, ScrollRestoration, useNavigate } from 'react-router-dom';
 
 export function RootLayout({ children }: WithChildren<unknown>) {
@@ -18,6 +19,10 @@ export function RootLayout({ children }: WithChildren<unknown>) {
         <Box as="ul" gap={4}>
           <li>
             <Link to={urls.home}>Home</Link>
+          </li>
+
+          <li>
+            <Link to={reverse(urls.movies.popular, { page: 1 })}>Popular</Link>
           </li>
 
           {authStore.isAuthenticated ? null : (

@@ -1,4 +1,4 @@
-import { Link } from '.';
+import { Link, Props as LinkProps } from '.';
 import { ConnectedThemeProvider } from 'features/theming';
 import { render } from '@testing-library/react';
 import {
@@ -28,12 +28,12 @@ const navigationState = {
   formData: undefined,
 };
 
-function setup(href: string) {
+function setup(props: LinkProps) {
   const router = createMemoryRouter(
     [
       {
         path: '/',
-        element: <Link to={href}>Example</Link>,
+        element: <Link {...props}>Example</Link>,
       },
     ],
     {
@@ -59,7 +59,7 @@ describe('<Link />', () => {
     });
 
     it('renders an anchor with the correct href', async () => {
-      const { findByRole } = setup('/destination');
+      const { findByRole } = setup({ to: '/destination' });
 
       expect(await findByRole('link')).toHaveAttribute('href', '/destination');
     });
@@ -81,7 +81,7 @@ describe('<Link />', () => {
     });
 
     it('renders a loading indicator', async () => {
-      const { findByRole } = setup('/destination');
+      const { findByRole } = setup({ to: '/destination' });
 
       expect(await findByRole('alert')).toHaveTextContent('Loading page...');
     });
@@ -103,7 +103,7 @@ describe('<Link />', () => {
     });
 
     it('does not render a loading indicator', async () => {
-      const { queryByRole } = setup('/destination');
+      const { queryByRole } = setup({ to: '/destination' });
 
       expect(await queryByRole('alert')).not.toBeInTheDocument();
     });

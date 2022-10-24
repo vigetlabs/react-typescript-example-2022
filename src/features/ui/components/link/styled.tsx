@@ -14,14 +14,17 @@ const fadeOut = keyframes({
   },
 });
 
-export const Anchor = styled(RouterLink)(({ theme }) => ({
-  color: theme.colors.text,
-  fontWeight: 'bold',
-  textDecoration: 'none',
-  '&:hover': {
-    textDecoration: 'underline',
-  },
-}));
+export const Anchor = styled(RouterLink)<{ disabled?: boolean }>(
+  ({ theme, disabled = false }) => ({
+    color: theme.colors.text,
+    opacity: disabled ? 0.5 : 1,
+    fontWeight: 'bold',
+    textDecoration: 'none',
+    '&:hover': {
+      textDecoration: 'underline',
+    },
+  }),
+);
 
 export const LoadingIndicator = styled('span')<{ isActive: boolean }>(
   ({ isActive }) => ({

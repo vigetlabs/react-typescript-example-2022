@@ -43,4 +43,16 @@ export const handlers = [
       );
     },
   ),
+
+  // rest.get(/image\.tmdb\.org/, async (req, res, ctx) => {
+  //   // await wait(Math.random() * 300 + 100);
+
+  //   // // fail 10% of image requests and wait an additional 500ms
+  //   // if (Math.random() > 0.9) {
+  //   //   await wait(500);
+  //   //   return res(ctx.status(500));
+  //   // }
+
+  //   return req.passthrough();
+  // }),
 ];
