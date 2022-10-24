@@ -11,7 +11,12 @@ import ReactDOM from 'react-dom/client';
 async function prepare() {
   if (config.enableMockServer) {
     const { worker } = await import('./test/mocks/browser');
-    return worker.start();
+
+    if (import.meta.hot) {
+      import.meta.hot.dispose(() => worker.stop());
+    }
+
+    return worker.start({ onUnhandledRequest: 'bypass' });
   }
 
   return Promise.resolve();
