@@ -4,7 +4,7 @@ import { useAuthStore } from 'features/auth';
 import { ThemeToggleButton, useThemeStore } from 'features/theming';
 import { Box, Button, Link, Paragraph } from 'features/ui';
 import { WithChildren } from 'helpers/types';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Outlet, ScrollRestoration, useNavigate } from 'react-router-dom';
 
 export function RootLayout({ children }: WithChildren<unknown>) {
   const authStore = useAuthStore();
@@ -12,6 +12,8 @@ export function RootLayout({ children }: WithChildren<unknown>) {
 
   return (
     <Box vertical>
+      <ScrollRestoration />
+
       <Header>
         <Box as="ul" gap={4}>
           <li>

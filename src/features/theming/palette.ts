@@ -1,17 +1,6 @@
-type ColorScale = {
-  50: string;
-  100: string;
-  200: string;
-  300: string;
-  400: string;
-  500: string;
-  600: string;
-  700: string;
-  800: string;
-  900: string;
-};
+export type ColorKey = keyof typeof palette;
 
-export const palette: Record<string, ColorScale> = {
+export const palette = {
   slate: {
     50: '#f8fafc',
     100: '#f1f5f9',
@@ -276,4 +265,4 @@ export const palette: Record<string, ColorScale> = {
     800: '#9f1239',
     900: '#881337',
   },
-};
+} as const;

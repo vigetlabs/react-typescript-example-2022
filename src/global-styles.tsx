@@ -19,15 +19,16 @@ const globals = css`
   html,
   body,
   #root {
-    height: 100%;
+    height: 100vh;
   }
 
   #root {
-    overflow: auto;
+    height: 100vh;
   }
 
   body {
     background-color: var(--bg);
+    overflow: auto;
   }
 `;
 
@@ -112,6 +113,7 @@ const reset = css`
   /**
    * 10. Remove list styling
    */
+  ol,
   ul {
     padding: 0;
     list-style: none;

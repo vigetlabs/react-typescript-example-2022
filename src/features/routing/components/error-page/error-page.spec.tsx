@@ -6,6 +6,7 @@ import {
 } from 'features/http';
 import { ConnectedThemeProvider } from 'features/theming';
 import { render } from '@testing-library/react';
+import { Fragment } from 'react';
 import { createMemoryRouter, RouterProvider } from 'react-router-dom';
 import { vi } from 'vitest';
 
@@ -19,7 +20,7 @@ function setup(errorToThrow: Error) {
       {
         path: '/',
         element: <Thrower error={errorToThrow} />,
-        errorElement: <ErrorPage />,
+        errorElement: <ErrorPage layout={Fragment} />,
       },
     ],
     {

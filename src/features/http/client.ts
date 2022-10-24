@@ -39,6 +39,7 @@ export function createClient(baseURL: string, timeout: number) {
     (error) => {
       return Promise.reject(ApiError.wrap(error));
     },
+    { synchronous: true },
   );
 
   return client;
