@@ -117,6 +117,7 @@ jobs:
       - name: Lighthouse
         uses: foo-software/lighthouse-check-action@master
         with:
+          device: all
           outputDirectory: ${{ github.workspace }}/tmp/artifacts
           slackWebhookUrl: ${{ secrets.LIGHTHOUSE_SLACK_WEBHOOK_URL }}
           prCommentEnabled: true
