@@ -103,6 +103,9 @@ jobs:
     runs-on: ubuntu-latest
     environment: CI
     steps:
+      - name: Create artifacts directory
+        run: mkdir -p ${{ github.workspace }}/tmp/artifacts
+
       - name: Wait for Netlify Preview
         uses: kamranayub/wait-for-netlify-action@v2.1.0
         id: wait-for-netflify-preview
@@ -110,7 +113,18 @@ jobs:
           site_name: "react-ts-reference-2022"
         env:
           NETLIFY_TOKEN: ${{secrets.NETLIFY_TOKEN}}
+
       - name: Lighthouse
         uses: foo-software/lighthouse-check-action@master
         with:
+          outputDirectory: ${{ github.workspace }}/tmp/artifacts
+          branch: ${{ github.ref }}
+          sha: ${{ github.sha }}
+          slackWebhookUrl: ${{ secrets.LIGHTHOUSE_SLACK_WEBHOOK_URL }}
           urls: '${{ steps.wait-for-netflify-preview.outputs.url }},${{ steps.wait-for-netflify-preview.outputs.url }}/login'
+
+      - name: Upload lighthouseartifacts
+        uses: actions/upload-artifact@master
+        with:
+          name: Lighthouse reports
+          path: ${{ github.workspace }}/tmp/artifacts
