@@ -124,7 +124,9 @@ jobs:
           outputDirectory: ${{ github.workspace }}/tmp/artifacts
           slackWebhookUrl: ${{ secrets.LIGHTHOUSE_SLACK_WEBHOOK_URL }}
           prCommentEnabled: true
+          prCommentSaveOld: false
           gitHubAccessToken: ${{ secrets.GITHUB_TOKEN }}
+          gitAuthor: ${{ github.actor }}
           branch: ${{ github.ref }}
           sha: ${{ github.sha }}
           urls: '${{ steps.wait-for-netflify-preview.outputs.url }}'
