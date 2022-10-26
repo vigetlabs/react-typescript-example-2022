@@ -108,14 +108,14 @@ jobs:
 
       - name: Wait for Netlify Preview
         uses: kamranayub/wait-for-netlify-action@v2.1.0
-        id: wait-for-netflify-preview
+        id: wait-for-netlify-preview
         with:
           site_name: "react-ts-reference-2022"
         env:
           NETLIFY_TOKEN: ${{ secrets.NETLIFY_TOKEN }}
 
       - name: Prime netlify site cache
-        run: curl -so /dev/null -w "%{time_connect} - %{time_starttransfer} - %{time_total}  " ${{ steps.wait-for-netflify-preview.outputs.url }}
+        run: curl -so /dev/null -w "%{time_connect} - %{time_starttransfer} - %{time_total}  " ${{ steps.wait-for-netlify-preview.outputs.url }}
 
       - name: Lighthouse
         uses: foo-software/lighthouse-check-action@master
@@ -129,7 +129,7 @@ jobs:
           gitAuthor: ${{ github.actor }}
           branch: ${{ github.ref }}
           sha: ${{ github.sha }}
-          urls: '${{ steps.wait-for-netflify-preview.outputs.url }}'
+          urls: '${{ steps.wait-for-netlify-preview.outputs.url }}'
 
       - name: Upload lighthouseartifacts
         uses: actions/upload-artifact@master
