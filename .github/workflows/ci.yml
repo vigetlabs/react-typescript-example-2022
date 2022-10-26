@@ -114,6 +114,9 @@ jobs:
         env:
           NETLIFY_TOKEN: ${{ secrets.NETLIFY_TOKEN }}
 
+      - name: Prime netlify site cache
+        run: curl -so /dev/null -w "%{time_connect} - %{time_starttransfer} - %{time_total}  " ${{ steps.wait-for-netflify-preview.outputs.url }}
+
       - name: Lighthouse
         uses: foo-software/lighthouse-check-action@master
         with:
