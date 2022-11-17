@@ -3,6 +3,8 @@ import 'dotenv/config';
 
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
+import svgr from 'vite-plugin-svgr';
+
 import tsconfigPaths from 'vite-tsconfig-paths';
 import GithubActionsReporter from 'vitest-github-actions-reporter';
 
@@ -11,6 +13,7 @@ export default defineConfig({
     port: Number(process.env.PORT),
   },
   plugins: [
+    svgr(),
     tsconfigPaths(),
     react({
       jsxImportSource: '@emotion/react',

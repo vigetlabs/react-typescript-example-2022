@@ -1,4 +1,5 @@
 import loader from './loader';
+import { CoverImage, FallbackAvatar, MovieHeader } from './styled';
 import { urls } from 'features/routing/urls';
 import { tmdbService } from 'features/tmdb';
 import { movieDetailQuery } from 'features/tmdb/service';
@@ -30,26 +31,17 @@ export default function MovieDetailPage() {
     staleTime: 1000 * 60 * 5,
   });
 
-  console.log(movie);
-
   return (
     <Box p={8} gap={4} vertical>
-      <Box gap={4}>
-        <div
-          css={{
-            width: '20%',
-            minWidth: 200,
-            maxWidth: 318,
-            flexShrink: 0,
-          }}
-        >
+      <MovieHeader gap={4} vertical>
+        <CoverImage>
           <MoviePoster
             src={
               movie.poster_path ? tmdbService.posterUrl(movie.poster_path) : '#'
             }
             alt={`${movie.title} cover image`}
           />
-        </div>
+        </CoverImage>
 
         <Box p={2} vertical>
           <Heading>{movie.title}</Heading>
@@ -109,7 +101,7 @@ export default function MovieDetailPage() {
             </>
           ) : null}
         </Box>
-      </Box>
+      </MovieHeader>
 
       <Box p={2} vertical>
         <Heading
@@ -128,26 +120,28 @@ export default function MovieDetailPage() {
         >
           {movie.credits.cast
             ? movie.credits.cast.map((cast) => (
-                <Link key={cast.id} to={`/person/${cast.id}`}>
-                  <div
-                    css={(theme) => ({
-                      borderRadius: '100%',
-                      aspectRatio: '1 / 1',
-                      overflow: 'hidden',
-                      backgroundColor: theme.colors.surface,
-                    })}
-                  >
-                    {cast.profile_path && (
-                      <img
-                        css={{
-                          width: '100%',
-                          height: '100%',
-                          objectFit: 'cover',
-                        }}
-                        src={tmdbService.posterUrl(cast.profile_path)}
-                      />
-                    )}
-                  </div>
+                <Link
+                  key={cast.id}
+                  to={`/person/${cast.id}`}
+                  css={(theme) => ({
+                    borderRadius: '100%',
+                    aspectRatio: '1 / 1',
+                    overflow: 'hidden',
+                    backgroundColor: theme.colors.surface,
+                  })}
+                >
+                  {cast.profile_path ? (
+                    <img
+                      css={{
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'cover',
+                      }}
+                      src={tmdbService.posterUrl(cast.profile_path)}
+                    />
+                  ) : (
+                    <FallbackAvatar />
+                  )}
 
                   <ScreenReaderText>{cast.name}</ScreenReaderText>
                 </Link>
