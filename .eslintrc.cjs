@@ -19,6 +19,7 @@ module.exports = {
     'plugin:react-hooks/recommended',
     'plugin:storybook/recommended',
     'plugin:prettier/recommended',
+    'plugin:jsx-a11y/strict',
   ],
   rules: {
     'react/react-in-jsx-scope': 'off',
