@@ -2,7 +2,7 @@ import { Card, Wrapper } from './styled';
 import { ThemeToggleButton, useThemeStore } from 'features/theming';
 import { Counter, Heading, Paragraph } from 'features/ui';
 
-export default function HomePage() {
+export function HomePage() {
   const themeStore = useThemeStore();
 
   return (

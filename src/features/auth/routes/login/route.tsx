@@ -19,7 +19,7 @@ import {
   useNavigation,
 } from 'react-router-dom';
 
-export default function LoginPage() {
+export function LoginPage() {
   const auth = useAuthStore();
   const location = useLocation();
   const navigation = useNavigation();
