@@ -1,6 +1,6 @@
 import { config } from 'config';
 import { createTrackedSelector } from 'react-tracked';
-import create from 'zustand';
+import { create } from 'zustand';
 import { combine, devtools, persist } from 'zustand/middleware';
 import { immer } from 'zustand/middleware/immer';
 
