@@ -1,5 +1,3 @@
-import { HomePage, loadHomePage } from './routes/home/lazy';
-
 export const urls = {
   home: '/',
 } as const;
@@ -7,7 +5,6 @@ export const urls = {
 export const routes = [
   {
     path: urls.home,
-    element: <HomePage />,
-    loader: loadHomePage,
+    lazy: () => import('./routes/home'),
   },
 ];
